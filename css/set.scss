@@ -1,0 +1,178 @@
+@import './variables.scss';
+@import './onepx.scss';
+// css reset
+html,
+body,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+span,
+div,
+p,
+a,
+form,
+input {
+    margin: 0;
+    padding: 0;
+    font-family: helvetica;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+a,
+input,
+button {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-appearance: none;
+    outline: none;
+    border: none;
+}
+
+img {
+    display: block;
+}
+
+// init
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+body {
+    font-family: Tahoma, 微软雅黑, "Microsoft Yahei", "hiragino sans gb", Helvetica, Arial, 宋体, sans-serif;
+    line-height: 1.2em;
+    background: map-get($map: $colors, $key: 'gary-1');
+}
+
+// 1rem为多少位图像素
+$rem: 750/16rem;
+// flex
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+@each $key,
+$value in $flex-jc {
+    .jc-#{$key} {
+        justify-content: $value;
+    }
+}
+
+@each $key,
+$value in $flex-jc {
+    .ai-#{$key} {
+        align-items: $value;
+    }
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+@each $typeKey,
+$type in $spacing-types {
+    // .m-1
+    @each $sizeKey,
+    $size in $spacing-sizes {
+        .#{$typeKey}-#{$sizeKey} {
+            #{$type}: $size * $spacing-base-size;
+        }
+    }
+    // .mx-1
+    @each $sizeKey,
+    $size in $spacing-sizes {
+        .#{$typeKey}x-#{$sizeKey} {
+            #{$type}-left: $size * $spacing-base-size;
+            #{$type}-right: $size * $spacing-base-size;
+        }
+        // .my-1
+        .#{$typeKey}y-#{$sizeKey} {
+            #{$type}-top: $size * $spacing-base-size;
+            #{$type}-bottom: $size * $spacing-base-size;
+        }
+    }
+    // .mt-1 {}
+    @each $directionKey,
+    $direction in $spacing-directions {
+        @each $sizeKey,
+        $size in $spacing-sizes {
+            .#{$typeKey}#{$directionKey}-#{$sizeKey} {
+                #{$type}-#{$direction}: $size * $spacing-base-size;
+            }
+        }
+    }
+}
+
+@each $colorKey,
+$color in $colors {
+    .text-#{$colorKey} {
+        color: $color;
+    }
+    .bg-#{$colorKey} {
+        background: $color;
+    }
+}
+
+// text oveflow
+.text-ellipsis {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// text align
+@each $var in (left, center, right) {
+    .text-#{$var} {
+        text-align: $var;
+    }
+}
+
+@each $sizeKey,
+$size in $font-sizes {
+    .fs-#{$sizeKey} {
+        font-size: $size * $base-font-size;
+    }
+}
+
+.wrap {
+    .head {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        .head-top {
+            height: 90/$rem;
+            .logo {
+                width: 140/$rem;
+                height: 46/$rem;
+            }
+            .search {
+                width: 37.5/$rem;
+                height: 37.5/$rem
+            }
+        }
+    }
+}

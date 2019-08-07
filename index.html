@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum=1.0,user-scalable=no">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/set.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="top">
+            <div class="head d-flex ai-center bg-black">
+                <img src="img/logo_new.png" class='logo mx-3'>
+                <div class='flex-1 d-flex jc-end ai-center'>
+                    <img src="img/sbtn.png" class='search'>
+                    <a href="javascript:;" class='mx-3 fs-xxs text-white'>登录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/tools.js"></script>
+<script>
+    window.onload = () => {
+        //禁止默认行为
+        document.addEventListener('touchstart', (ev) => {
+            ev = ev || window.event
+            ev.preventDefault()
+        })
+
+        // rem 适配
+        ;
+        (() => {
+            const styleNode = document.createElement('style')
+            const width = document.documentElement.clientWidth / 16
+            styleNode.innerHTML = `html{font-size: ${width}px!important}`
+            document.head.appendChild(styleNode)
+        })()
+
+    }
+</script>
+
+</html>

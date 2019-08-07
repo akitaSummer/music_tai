@@ -1,0 +1,39 @@
+@mixin onepx-top($color: black) {
+    position: relative;
+    &::before {
+        position: absolute;
+        content: '';
+        display: block;
+        top: 0;
+        width: 100%;
+        height: 1px;
+        background: $color;
+        @media only screen and (-webkit-device-pixel-ratio: 2) {
+            tranfrom: scaleY(.5);
+        }
+        ;
+        @media only screen and (-webkit-device-pixel-ratio: 3) {
+            tranfrom: scaleY(.33333333);
+        }
+    }
+}
+
+@mixin onepx-bottom($color: black) {
+    position: relative;
+    &::before {
+        position: absolute;
+        content: '';
+        display: block;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        background: $color;
+        @media only screen and (-webkit-device-pixel-ratio: 2) {
+            tranfrom: scaleY(.5);
+        }
+        ;
+        @media only screen and (-webkit-device-pixel-ratio: 3) {
+            tranfrom: scaleY(.33333333);
+        }
+    }
+}
