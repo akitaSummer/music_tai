@@ -158,21 +158,88 @@ $size in $font-sizes {
     }
 }
 
+// clearfix
+.clearfix {
+    zoom: 1;
+    &::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
 .wrap {
-    .head {
+    height: 100%;
+    .top {
         position: sticky;
         top: 0;
         z-index: 999;
-        .head-top {
+        .head {
             height: 90/$rem;
             .logo {
-                width: 140/$rem;
-                height: 46/$rem;
+                width: 112/$rem;
+                height: 40/$rem;
             }
             .search {
                 width: 37.5/$rem;
-                height: 37.5/$rem
+                height: 37.5/$rem;
             }
+        }
+    }
+    .content {
+        .carousel-wrap {
+            position: relative;
+            .list {
+                list-style: none;
+                overflow: hidden;
+                position: absolute;
+                li {
+                    float: left;
+                    img {
+                        width: 100%;
+                        display: block;
+                    }
+                    a {
+                        display: block;
+                    }
+                }
+            }
+            .points-wrap {
+                position: absolute;
+                width: 100%;
+                bottom: 0;
+                text-align: center;
+                z-index: 1;
+                span {
+                    display: inline-block;
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background: grey;
+                    margin-left: 5px;
+                    &.active {
+                        background: pink;
+                    }
+                }
+            }
+        }
+    }
+    .bottom {
+        position: sticky;
+        bottom: 0;
+        z-index: 999;
+        height: 100/rem;
+        img {
+            width: 76/$rem;
+            height: 76/$rem;
+        }
+        p {
+            font-size: 0.45rem;
+        }
+        .button {
+            font-size: 0.6rem;
+            font-weight: bold;
+            background: map-get($map: $colors, $key: 'blue');
         }
     }
 }

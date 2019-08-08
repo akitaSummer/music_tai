@@ -440,17 +440,68 @@ body {
 .fs-xl {
   font-size: 1.2308rem; }
 
-.wrap .head {
-  position: sticky;
-  top: 0;
-  z-index: 999; }
-  .wrap .head .head-top {
-    height: 1.92rem; }
-    .wrap .head .head-top .logo {
-      width: 2.9866666667rem;
-      height: 0.9813333333rem; }
-    .wrap .head .head-top .search {
-      width: 0.8rem;
-      height: 0.8rem; }
+.clearfix {
+  zoom: 1; }
+  .clearfix::after {
+    content: '';
+    display: table;
+    clear: both; }
+
+.wrap {
+  height: 100%; }
+  .wrap .top {
+    position: sticky;
+    top: 0;
+    z-index: 999; }
+    .wrap .top .head {
+      height: 1.92rem; }
+      .wrap .top .head .logo {
+        width: 2.3893333333rem;
+        height: 0.8533333333rem; }
+      .wrap .top .head .search {
+        width: 0.8rem;
+        height: 0.8rem; }
+  .wrap .content .carousel-wrap {
+    position: relative; }
+    .wrap .content .carousel-wrap .list {
+      list-style: none;
+      overflow: hidden;
+      position: absolute; }
+      .wrap .content .carousel-wrap .list li {
+        float: left; }
+        .wrap .content .carousel-wrap .list li img {
+          width: 100%;
+          display: block; }
+        .wrap .content .carousel-wrap .list li a {
+          display: block; }
+    .wrap .content .carousel-wrap .points-wrap {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      text-align: center;
+      z-index: 1; }
+      .wrap .content .carousel-wrap .points-wrap span {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: grey;
+        margin-left: 5px; }
+        .wrap .content .carousel-wrap .points-wrap span.active {
+          background: pink; }
+  .wrap .bottom {
+    position: sticky;
+    bottom: 0;
+    z-index: 999;
+    height: 100/rem; }
+    .wrap .bottom img {
+      width: 1.6213333333rem;
+      height: 1.6213333333rem; }
+    .wrap .bottom p {
+      font-size: 0.45rem; }
+    .wrap .bottom .button {
+      font-size: 0.6rem;
+      font-weight: bold;
+      background: #27d5bf; }
 
 /*# sourceMappingURL=set.css.map */
