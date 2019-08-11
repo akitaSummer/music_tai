@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="content">
-            <div class="carousel-wrap">
+            <div class="carousel-wrap" needCarousel needAuto>
                 <div class="points-wrap"></div>
             </div>
         </div>
@@ -54,43 +54,9 @@
             document.head.appendChild(styleNode)
         })()
 
-        const carouselWrap = document.querySelector('.carousel-wrap')
-        const pointsWrap = document.querySelector('.carousel-wrap .points-wrap')
         const arr1 = ['img/001.jpg', 'img/002.jpg', 'img/003.jpg', 'img/004.jpg', 'img/005.png', 'img/006.png', 'img/007.jpg', 'img/008.jpg', 'img/009.jpg', 'img/010.jpg']
         const arr2 = ['img/101.jpg', 'img/102.jpg', 'img/103.jpg', 'img/104.jpg', 'img/105.jpg', 'img/106.jpg']
         const arr3 = ['img/201.jpg', 'img/202.jpg', 'img/203.jpg', 'img/204.jpg', 'img/205.jpg', 'img/206.jpg']
-
-        carousel = (arr) => {
-            const ulNode = document.createElement('ul')
-                // 布局
-            if (carouselWrap) {
-                const styleNode = document.createElement('style')
-                ulNode.classList.add('list')
-                    // ulNode.classList.add('clearfix')
-                for (let i = 0; i < arr.length; i++) {
-                    ulNode.innerHTML += `<li><a href="javascript:;"><img src="${arr[i]}"></a></li>`
-                }
-                styleNode.innerHTML += `.carousel-wrap .list li{width: ${1/arr.length*100}%;} .carousel-wrap .list{width: ${arr.length}00%}`
-                carouselWrap.appendChild(ulNode)
-                document.head.appendChild(styleNode)
-
-                const imgNodes = document.querySelector('.carousel-wrap .list li img')
-                setTimeout(() => {
-                    carouselWrap.style.height = imgNodes.offsetHeight + "px"
-                }, 100)
-            }
-
-            if (pointsWrap) {
-                for (let i = 0; i < arr1.length; i++) {
-                    if (i === 0) {
-                        pointsWrap.innerHTML += `<span class="active"></span>`
-                    } else {
-                        pointsWrap.innerHTML += `<span></span>`
-                    }
-                }
-                const pointsSpan = document.querySelector('.carousel-wrap .points-wrap span')
-            }
-        }
 
         carousel(arr1)
     }
