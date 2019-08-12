@@ -185,6 +185,37 @@ $size in $font-sizes {
                 height: 37.5/$rem;
             }
         }
+        .nav {
+            @include onepx-bottom;
+            position: relative;
+            width: 100%;
+            height: 75/$rem;
+            background: map-get($map: $colors, $key: 'white');
+            .list {
+                white-space: nowrap;
+                height: 100%;
+                float: left;
+                padding: 14/$rem 0 14/$rem 0;
+                li {
+                    display: inline-block;
+                    font-size: 0.5rem;
+                    height: 100%;
+                    text-align: center;
+                    vertical-align: top;
+                    padding: 0 0.75rem;
+                    a {
+                        color: map-get($map: $colors, $key: 'black');
+                    }
+                }
+                .smallB {
+                    height: 4/$rem;
+                    width: 47/$rem;
+                    position: absolute;
+                    bottom: 1px;
+                    background-color: map-get($map: $colors, $key: 'blue');
+                }
+            }
+        }
     }
     .content {
         .carousel-wrap {

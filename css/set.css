@@ -461,6 +461,46 @@ body {
       .wrap .top .head .search {
         width: 0.8rem;
         height: 0.8rem; }
+    .wrap .top .nav {
+      position: relative;
+      position: relative;
+      width: 100%;
+      height: 1.6rem;
+      background: #fff; }
+      .wrap .top .nav::before {
+        position: absolute;
+        content: '';
+        display: block;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        background: black; }
+        @media only screen and (-webkit-device-pixel-ratio: 2) {
+          .wrap .top .nav::before {
+            tranfrom: scaleY(0.5); } }
+        @media only screen and (-webkit-device-pixel-ratio: 3) {
+          .wrap .top .nav::before {
+            tranfrom: scaleY(0.33333333); } }
+      .wrap .top .nav .list {
+        white-space: nowrap;
+        height: 100%;
+        float: left;
+        padding: 0.2986666667rem 0 0.2986666667rem 0; }
+        .wrap .top .nav .list li {
+          display: inline-block;
+          font-size: 0.5rem;
+          height: 100%;
+          text-align: center;
+          vertical-align: top;
+          padding: 0 0.75rem; }
+          .wrap .top .nav .list li a {
+            color: #000000; }
+        .wrap .top .nav .list .smallB {
+          height: 0.0853333333rem;
+          width: 1.0026666667rem;
+          position: absolute;
+          bottom: 1px;
+          background-color: #27d5bf; }
   .wrap .content .carousel-wrap {
     position: relative; }
     .wrap .content .carousel-wrap .list {
