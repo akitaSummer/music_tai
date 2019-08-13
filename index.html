@@ -20,7 +20,7 @@
             </div>
             <div class="nav">
                 <ul class="list">
-                    <li><a href="javascript:;">首页</a></li>
+                    <li><a href="javascript:;" class='active'>首页</a></li>
                     <li><a href="javascript:;">MV</a></li>
                     <li><a href="javascript:;">悦单</a></li>
                     <li><a href="javascript:;">V榜</a></li>
@@ -76,68 +76,36 @@
         const arr3 = ['img/201.jpg', 'img/202.jpg', 'img/203.jpg', 'img/204.jpg', 'img/205.jpg', 'img/206.jpg']
 
         carousel(arr1)
+        drag()
 
-        const drag = () => {
-            // 滑屏区域
-            const wrap = document.querySelector('.wrap .top .nav')
-                // 滑屏元素
-            const item = document.querySelector('.wrap .top .nav .list')
-            let startX = 0
-            let elementX = 0
-            let lastTime = 0
-            let timeDis = 0
-            let pointDis = 0
-            let lastPoint = 0
-            const minX = wrap.clientWidth - item.clientWidth
-            wrap.addEventListener('touchstart', (ev) => {
-                ev = ev || window.event
-                const TouchC = ev.changedTouches[0]
-                item.style.transition = 'none'
-                startX = TouchC.clientX
-                elementX = css(item, 'translateX')
-                lastTime = new Date().getTime()
-                lastPoint = css(item, 'translateX')
+        const changeChoose = () => {
+            const list = document.querySelector('.wrap .top .list')
+            const aNodes = document.querySelectorAll('.wrap .top .list li a')
+            const smallB = document.querySelector('.wrap .top .list .smallB')
+            list.addEventListener('touchstart', () => {
+                list.isMove = false
             })
-            wrap.addEventListener('touchmove', (ev) => {
-                ev = ev || window.event
-                const TouchC = ev.changedTouches[0]
-                const nowX = TouchC.clientX
-                const disX = nowX - startX
-                let translateX = elementX + disX
-                    // 橡皮筋效果
-                    // 在touchmove过程中, 每一次touchmove真正的有效距离在减小, 但是元素的滑动距离在增大
-                if (translateX > 0) {
-                    const scale = document.documentElement.clientWidth / ((document.documentElement.clientWidth + translateX) * 2)
-                    translateX = elementX + disX * scale
-                } else if (translateX < minX) {
-                    console.log(minX)
-                    const over = minX - translateX
-                    const scale = document.documentElement.clientWidth / ((document.documentElement.clientWidth + over) * 2)
-                    translateX = elementX + disX * scale
-                }
-                css(item, 'translateX', translateX)
-                const nowTime = new Date().getTime()
-                const nowPoint = css(item, 'translateX')
-                timeDis = nowTime - lastTime
-                pointDis = nowPoint - lastPoint
-                lastTime = nowTime
-                lastPoint = nowPoint
+            list.addEventListener('touchmove', () => {
+                list.isMove = true
             })
-            wrap.addEventListener('touchend', (ev) => {
+            list.addEventListener('touchend', (ev) => {
                 ev = ev || window.event
-                let translateX = css(item, 'translateX')
-                const speed = pointDis / timeDis
-                let targetX = translateX + speed * 200
-                item.style.transition = '1s transform'
-                if (targetX > 0) {
-                    targetX = 0
-                } else if (targetX < minX) {
-                    targetX = minX
+                if (list.isMove) {
+                    return
                 }
-                css(item, 'translateX', targetX)
+                const touchC = ev.changedTouches[0]
+                for (let i = 0; i < aNodes.length; i++) {
+                    tools.removeClass(aNodes[i], 'active')
+                }
+                tools.addClass(touchC.target, 'active')
+                const active = document.querySelector('.wrap .top .list .active')
+                smallB.style.width = active.offsetWidth + 'px'
+                smallB.style.transition = '1s transform'
+                css(smallB, 'translateX', active.offsetLeft)
             })
         }
-        drag()
+
+        changeChoose()
     }
 </script>
 
