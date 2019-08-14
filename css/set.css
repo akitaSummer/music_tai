@@ -531,6 +531,38 @@ body {
         margin-left: 5px; }
         .wrap .content .carousel-wrap .points-wrap span.active {
           background: pink; }
+  .wrap .content .card {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0;
+    margin-bottom: 0.5rem;
+    background-color: #fff; }
+    .wrap .content .card .card-nav {
+      display: flex;
+      padding: 0.25rem 0; }
+      .wrap .content .card .card-nav .card-nav-content {
+        padding: 0 0.5rem;
+        font-weight: bold;
+        font-size: 0.6154rem; }
+      .wrap .content .card .card-nav .card-change {
+        padding: 0 0.5rem;
+        font-size: 0.45rem; }
+    .wrap .content .card .card-content {
+      flex-wrap: wrap;
+      display: flex;
+      justify-content: center; }
+      .wrap .content .card .card-content img {
+        width: 7.68rem;
+        padding: 0 0.25rem; }
+      .wrap .content .card .card-content .card-content-box {
+        padding: 0 0.5rem; }
+        .wrap .content .card .card-content .card-content-box .img-content {
+          font-size: 0.5rem;
+          height: 20px; }
+        .wrap .content .card .card-content .card-content-box .img-author {
+          font-size: 0.45rem;
+          height: 20px;
+          color: #b7b7b7; }
   .wrap .bottom {
     position: sticky;
     bottom: 0;

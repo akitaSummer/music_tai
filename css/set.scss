@@ -256,6 +256,47 @@ $size in $font-sizes {
                 }
             }
         }
+        .card {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem 0;
+            margin-bottom: 0.5rem;
+            background-color: map-get($map: $colors, $key: 'white');
+            .card-nav {
+                display: flex;
+                padding: 0.25rem 0;
+                .card-nav-content {
+                    padding: 0 0.5rem;
+                    font-weight: bold;
+                    font-size: 0.6154rem;
+                }
+                .card-change {
+                    padding: 0 0.5rem;
+                    font-size: 0.45rem;
+                }
+            }
+            .card-content {
+                flex-wrap: wrap;
+                display: flex;
+                justify-content: center;
+                img {
+                    width: 360/$rem;
+                    padding: 0 0.25rem;
+                }
+                .card-content-box {
+                    padding: 0 0.5rem;
+                    .img-content {
+                        font-size: 0.5rem;
+                        height: 20px;
+                    }
+                    .img-author {
+                        font-size: 0.45rem;
+                        height: 20px;
+                        color: map-get($map: $colors, $key: 'gray');
+                    }
+                }
+            }
+        }
     }
     .bottom {
         position: sticky;

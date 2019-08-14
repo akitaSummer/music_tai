@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div class="wrap">
+    <div class="wrap bg-gray-1">
         <div class="top">
             <div class="head d-flex ai-center bg-black">
                 <img src="img/logo_new.png" class='logo mx-2'>
@@ -39,6 +39,24 @@
         <div class="content">
             <div class="carousel-wrap" needCarousel needAuto>
                 <div class="points-wrap"></div>
+            </div>
+            <div class="card-1 card">
+                <div class="card-nav">
+                    <div class='card-nav-content'></div>
+                    <div class="flex-1"></div>
+                    <div class="card-change">换一换</div>
+                </div>
+                <div class="card-content">
+                </div>
+            </div>
+            <div class="card-2 card">
+                <div class="card-nav">
+                    <div class='card-nav-content'></div>
+                    <div class="flex-1"></div>
+                    <div class="card-change">换一换</div>
+                </div>
+                <div class="card-content">
+                </div>
             </div>
         </div>
         <div class="bottom">
@@ -72,9 +90,56 @@
         })()
 
         const arr1 = ['img/001.jpg', 'img/002.jpg', 'img/003.jpg', 'img/004.jpg', 'img/005.png', 'img/006.png', 'img/007.jpg', 'img/008.jpg', 'img/009.jpg', 'img/010.jpg']
-        const arr2 = ['img/101.jpg', 'img/102.jpg', 'img/103.jpg', 'img/104.jpg', 'img/105.jpg', 'img/106.jpg']
-        const arr3 = ['img/201.jpg', 'img/202.jpg', 'img/203.jpg', 'img/204.jpg', 'img/205.jpg', 'img/206.jpg']
-
+        const contentArr1 = [{
+            img: 'img/101.jpg',
+            content: '这么久没见 官方版',
+            author: '薛之谦'
+        }, {
+            img: 'img/102.jpg',
+            content: '骑单车 官方版',
+            author: '易安音乐社'
+        }, {
+            img: 'img/103.jpg',
+            content: 'Magnetic Moon',
+            author: 'Tiffany'
+        }, {
+            img: 'img/104.jpg',
+            content: 'Boyfriend',
+            author: 'Ariana Grande'
+        }, {
+            img: 'img/105.jpg',
+            content: '纠缠 官方版',
+            author: '信'
+        }, {
+            img: 'img/106.jpg',
+            content: 'What are you up to',
+            author: '麦丹尼尔'
+        }]
+        const contentArr2 = [{
+            img: 'img/201.jpg',
+            content: 'AI MV花絮',
+            author: ''
+        }, {
+            img: 'img/202.jpg',
+            content: '没资格男多 MV幕后花絮',
+            author: ''
+        }, {
+            img: 'img/203.jpg',
+            content: '当杰伦来到圣所',
+            author: ''
+        }, {
+            img: 'img/204.jpg',
+            content: 'Love Myself全球活动影像',
+            author: ''
+        }, {
+            img: 'img/205.jpg',
+            content: '被迷住了吧',
+            author: 'FNS歌谣祭'
+        }, {
+            img: 'img/206.jpg',
+            content: '我是一只小小鸟 现场版',
+            author: ''
+        }]
         carousel(arr1)
         drag()
 
@@ -106,6 +171,26 @@
         }
 
         changeChoose()
+
+        const card = (title, contentArr, id) => {
+            const cardNavContent = document.querySelector(`.${id} .card-nav .card-nav-content`)
+            const cardContent = document.querySelector(`.${id} .card-content`)
+
+            cardNavContent.innerHTML = title
+            for (let i = 0; i < contentArr.length; i++) {
+                cardContent.innerHTML += `
+                <div class='py-1'>
+                        <img src="${contentArr[i].img}">
+                        <div class="card-content-box">
+                            <p class='img-content'>${contentArr[i].content}</p>
+                            <p class='img-author text-gray'>${contentArr[i].author}</p>
+                        </div>
+                    </div>
+                    `
+            }
+        }
+        card('MV首播', contentArr1, 'card-1')
+        card('娱乐', contentArr2, 'card-2')
     }
 </script>
 
