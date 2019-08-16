@@ -283,6 +283,184 @@
 
         })
     }
+    window.card = (title, contentArr, id) => {
+        const cardNavContent = document.querySelector(`.${id} .card-nav .card-nav-content`)
+        const cardContent = document.querySelector(`.${id} .card-content`)
+
+        cardNavContent.innerHTML = title
+        for (let i = 0; i < contentArr.length; i++) {
+            cardContent.innerHTML += `
+            <div class='py-1'>
+                    <img src="${contentArr[i].img}">
+                    <div class="card-content-box">
+                        <p class='img-content'>${contentArr[i].content}</p>
+                        <p class='img-author text-gray'>${contentArr[i].author}</p>
+                    </div>
+                </div>
+                `
+        }
+    }
+    window.vMove = (wrap, callBack) => {
+        // 元素一开始的位置, 手指一开始的位置
+        let item = document.querySelector('.wrap .content')
+        let item1 = document.querySelector('.wrap .bottom')
+        let item2 = document.querySelector('.wrap .top')
+        let start = {}
+        let element = {}
+        let minY = wrap.clientHeight - item.clientHeight - item1.clientHeight - item2.clientHeight
+            // 快速滑屏的必要元素
+        let lastTime = 0
+        let nowTime = 0
+        let timeDis = 0
+        let startPoint = 0
+
+        let isY = true
+        let isFirst = true
+
+        // 即点即停
+        let cleartime = 0
+        let type = 'Linear'
+        const Tween = {
+            // t: 当前是哪一次
+            // b: 初始位置
+            // c: 最终位置
+            // d: 总次数
+            Linear: (t, b, c, d) => { return c * t / d + b },
+            back: (t, b, c, d, s) => {
+                if (s === undefined) {
+                    s = 1.70158
+                }
+                return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b
+            }
+        }
+
+        const bsr = (type, targetY, time) => {
+            clearInterval(cleartime)
+                // 当前次数
+            let t = 0
+                // 初始位置
+            const b = css(item, 'translateY')
+                // 最终位置-初始位置
+            const c = targetY - b
+                // 总次数
+            const d = time * 60
+            cleartime = setInterval(() => {
+                t++
+                if (callBack && typeof callBack['move'] === 'function') {
+                    callBack['move'].call(item)
+                }
+                if (t > d) {
+                    clearInterval(cleartime)
+                    if (callBack && typeof callBack['end'] === 'function') {
+                        callBack['end'].call(item)
+                    }
+                }
+                const point = Tween[type](t, b, c, d, s = 1.7)
+                css(item, 'translateY', point)
+            }, 1000 / 60)
+        }
+
+        wrap.addEventListener('touchstart', (ev) => {
+            ev = ev || window.event
+            const touchC = ev.changedTouches[0]
+            minY = wrap.clientHeight - item.clientHeight - item1.clientHeight - item2.clientHeight
+            console.log(minY)
+            item.style.transition = 'none'
+            start = { clientX: touchC.clientX, clientY: touchC.clientY }
+            element = { x: css(item, 'translateX'), y: css(item, 'translateY') }
+            lastTime = new Date().getTime()
+            startPoint = lastPoint = touchC.clientY
+            pointDis = 0
+
+            isY = true
+            isFirst = true
+
+            clearInterval(cleartime)
+
+            if (callBack && typeof callBack['start'] === 'function') {
+                callBack['start']()
+            }
+        })
+        wrap.addEventListener('touchmove', (ev) => {
+            minY = wrap.clientHeight - item.clientHeight - item1.clientHeight - item2.clientHeight
+
+            if (!isY) {
+                return
+            }
+
+            ev = ev || window.event
+            const touchC = ev.changedTouches[0]
+            const now = touchC
+            const dis = { x: now.clientX - start.clientX, y: now.clientY - start.clientY }
+            let translateY = element.y + dis.y
+
+            if (isFirst) {
+                isFirst = false
+                if (Math.abs(dis.x) > Math.abs(dis.y)) {
+                    isY = false
+                    return
+                }
+            }
+            nowTime = new Date().getTime()
+            const nowPoint = touchC.clientY
+            timeDis = nowTime - lastTime
+            pointDis = nowPoint - lastPoint
+            lastTime = nowTime
+            lastPoint = nowPoint
+
+            // 橡皮筋效果
+            // 在touchmove过程中, 每一次touchmove真正的有效距离在减小, 但是元素的滑动距离在增大
+            if (translateY > 0) {
+                item.handMove = true
+                const scale = document.documentElement.clientHeight / ((document.documentElement.clientHeight + translateY) * 2)
+                translateY = css(item, 'translateY') + pointDis * scale
+            } else if (translateY < minY) {
+                // translateY = minY
+                item.handMove = true
+                const over = minY - translateY
+                const scale = document.documentElement.clientHeight / ((document.documentElement.clientHeight + over) * 2)
+                translateY = css(item, 'translateY') + pointDis * scale
+            }
+            css(item, 'translateY', translateY)
+            if (callBack && typeof callBack['move'] === 'function') {
+                callBack['move'].call(item)
+            }
+        })
+        wrap.addEventListener('touchend', () => {
+            minY = wrap.clientHeight - item.clientHeight - item1.clientHeight - item2.clientHeight
+            if (!item.handMove) {
+                const translateY = css(item, 'translateY')
+                const speed = Math.abs(pointDis / timeDis) < 0.5 ? 0 : pointDis / timeDis
+                let targetY = translateY + speed * 200
+                let time = Math.abs(speed) * 0.2 < 1 ? 1 : Math.abs(speed) * 0.2
+                time = time > 2 ? 2 : time
+                    // 滑屏的橡皮筋效果
+                if (targetY > 0) {
+                    targetY = 0
+                    type = 'back'
+                } else if (targetY < minY) {
+                    targetY = minY
+                    type = 'back'
+                }
+                bsr(type, targetY, time)
+            } else {
+                let translateY = css(item, 'translateY')
+                item.style.transition = '1s transform'
+                if (translateY > 0) {
+                    translateY = 0
+                    css(item, 'translateY', translateY)
+                } else if (translateY < minY) {
+                    translateY = minY
+                    css(item, 'translateY', translateY)
+                }
+                item.handMove = false
+                if (callBack && typeof callBack['end'] === 'function') {
+                    callBack['end'].call(item)
+                }
+            }
+        })
+
+    }
     window.tools = {};
     tools.addClass = function(node, className) {
         var reg = new RegExp("\\b" + className + "\\b");

@@ -37,27 +37,30 @@
             </div>
         </div>
         <div class="content">
-            <div class="carousel-wrap" needCarousel needAuto>
-                <div class="points-wrap"></div>
+            <div>
+                <div class="carousel-wrap" needCarousel needAuto>
+                    <div class="points-wrap"></div>
+                </div>
+                <div class="card-1 card">
+                    <div class="card-nav">
+                        <div class='card-nav-content'></div>
+                        <div class="flex-1"></div>
+                        <div class="card-change">换一换</div>
+                    </div>
+                    <div class="card-content">
+                    </div>
+                </div>
+                <div class="card-2 card">
+                    <div class="card-nav">
+                        <div class='card-nav-content'></div>
+                        <div class="flex-1"></div>
+                        <div class="card-change">换一换</div>
+                    </div>
+                    <div class="card-content">
+                    </div>
+                </div>
             </div>
-            <div class="card-1 card">
-                <div class="card-nav">
-                    <div class='card-nav-content'></div>
-                    <div class="flex-1"></div>
-                    <div class="card-change">换一换</div>
-                </div>
-                <div class="card-content">
-                </div>
-            </div>
-            <div class="card-2 card">
-                <div class="card-nav">
-                    <div class='card-nav-content'></div>
-                    <div class="flex-1"></div>
-                    <div class="card-change">换一换</div>
-                </div>
-                <div class="card-content">
-                </div>
-            </div>
+
         </div>
         <div class="bottom">
             <div class="d-flex ai-center bg-white">
@@ -172,25 +175,11 @@
 
         changeChoose()
 
-        const card = (title, contentArr, id) => {
-            const cardNavContent = document.querySelector(`.${id} .card-nav .card-nav-content`)
-            const cardContent = document.querySelector(`.${id} .card-content`)
-
-            cardNavContent.innerHTML = title
-            for (let i = 0; i < contentArr.length; i++) {
-                cardContent.innerHTML += `
-                <div class='py-1'>
-                        <img src="${contentArr[i].img}">
-                        <div class="card-content-box">
-                            <p class='img-content'>${contentArr[i].content}</p>
-                            <p class='img-author text-gray'>${contentArr[i].author}</p>
-                        </div>
-                    </div>
-                    `
-            }
-        }
         card('MV首播', contentArr1, 'card-1')
         card('娱乐', contentArr2, 'card-2')
+
+        const wrap = document.querySelector('.wrap')
+        vMove(wrap)
     }
 </script>
 
