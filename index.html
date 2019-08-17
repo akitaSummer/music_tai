@@ -10,6 +10,7 @@
 
 <body>
     <div class="wrap bg-gray-1">
+        <div class="scrollBar"></div>
         <div class="top">
             <div class="head d-flex ai-center bg-black">
                 <img src="img/logo_new.png" class='logo mx-2'>
@@ -178,8 +179,28 @@
         card('MV首播', contentArr1, 'card-1')
         card('娱乐', contentArr2, 'card-2')
 
-        const wrap = document.querySelector('.wrap')
-        vMove(wrap)
+        const Move = () => {
+            const wrap = document.querySelector('.wrap')
+            const content = document.querySelector('.wrap .content div')
+            const bar = document.querySelector('.wrap .scrollBar')
+            const scale = wrap.clientHeight / content.clientHeight
+            bar.style.height = wrap.clientHeight * scale + 'px'
+            const callback = {
+                start() {
+                    bar.style.opacity = 1
+                },
+                move() {
+                    const scale = css(this, 'translateY') / (wrap.clientHeight - content.clientHeight)
+                    css(bar, 'translateY', scale * (wrap.clientHeight - bar.offsetHeight))
+                },
+                end() {
+                    bar.style.opacity = 0
+                }
+            }
+            vMove(wrap, callback)
+        }
+        setTimeout(Move, 50)
+
     }
 </script>
 

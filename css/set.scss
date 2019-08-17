@@ -173,7 +173,7 @@ $size in $font-sizes {
     .top {
         position: sticky;
         top: 0;
-        z-index: 999;
+        z-index: 8;
         .head {
             height: 90/$rem;
             .logo {
@@ -301,7 +301,7 @@ $size in $font-sizes {
     .bottom {
         position: sticky;
         bottom: 0;
-        z-index: 999;
+        z-index: 8;
         height: 100/rem;
         img {
             width: 76/$rem;
@@ -315,5 +315,16 @@ $size in $font-sizes {
             font-weight: bold;
             background: map-get($map: $colors, $key: 'blue');
         }
+    }
+    .scrollBar {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 2px;
+        height: 100%;
+        background: darkgray;
+        z-index: 9;
+        transition: 1s opacity;
+        opacity: 0;
     }
 }
